@@ -252,6 +252,15 @@ body.is-loading {
   margin-top: 23px;
 }
 
+/* タイトルが 1 行の作品（Figma: タイトル y=462、カテゴリー y=545） */
+.work-hero--single .work-hero__text {
+  padding-top: 222px;
+}
+
+.work-hero--single .work-hero__category {
+  margin-top: 35px;
+}
+
 /* 2×2、各 600×338、すき間なし */
 .work-gallery {
   display: grid;
@@ -264,6 +273,18 @@ body.is-loading {
   width: 100%;
   aspect-ratio: 600 / 338;
   object-fit: cover;
+}
+
+/* 白背景の画像に薄い影（Figma: rgba(0,0,0,0.02) を重ねる） */
+.work-gallery__shade {
+  position: relative;
+}
+
+.work-gallery__shade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.02);
 }
 
 .work-info {
