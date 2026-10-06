@@ -38,4 +38,4 @@
 
 - **Neue Haas は体験版（Trial）**。収録文字は英数字と一部の記号（`! " ' , - . ? ‘ ’ “ ”`）だけで、`& / : @ ( )` などは入っていない。サイトを公開する前に、製品版と Web 用ライセンスが必要かを Commercial Type の条件で確認する
 - **AXIS Std を Web で使うには Web 用のライセンスが別に必要**かを確認する。1 ファイル約 1.9MB あるので、使う文字だけにサブセット化して WOFF2 に変換してから読み込む
-- Git（公開リポジトリ）には、サイトで使っている `NeueHaasGrotDispRound-55Roman-Trial.otf` と `AxisStd-Light.otf` だけを入れている（2026-10-06 に本人判断で公開）。ほかのウェイトは `.gitignore` で除外。ライセンスの確認は上の 2 点のとおり残っている
+- Git（公開リポジトリ）には、サイトで使っているフォントだけを入れている（2026-10-06 に本人判断で公開）：Display Round 55 Roman（名前・見出し）/ Display Round 45 Light（nav）/ Display 55 Roman（top の作品タイトル。`en/NeueHaasGrotDisp/`）/ AXIS Std Light（作品情報）。ほかのウェイトは `.gitignore` で除外。ライセンスの確認は上の 2 点のとおり残っている

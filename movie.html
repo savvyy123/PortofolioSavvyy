@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie | Ishikawa Sota</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Movie（Figma: ポートフォリオ 71:120、1440px 幅） -->
+  <header class="header">
+    <a class="header__name" href="index.html">Ishikawa Sota</a>
+    <nav class="header__nav">
+      <a href="index.html#profile">profile</a>
+      <a href="movie.html">movie</a>
+      <a href="index.html#poster">poster</a>
+      <a href="index.html#words">words</a>
+    </nav>
+  </header>
+
+  <main class="work-page">
+    <section class="work-hero work-hero--single">
+      <div class="work-hero__text">
+        <h1 class="work-hero__title">Movie</h1>
+        <p class="work-hero__category">2026~</p>
+      </div>
+      <div class="work-hero__image movie-hero">
+        <video id="movie-hero" muted playsinline preload="auto"></video>
+      </div>
+    </section>
+
+    <!-- 動画は js/movie.js で日付の新しい順に並べる -->
+    <div class="movie-grid">
+      <div class="movie-grid__col"></div>
+      <div class="movie-grid__col"></div>
+    </div>
+
+    <dl class="work-info">
+      <div>
+        <dt>soft&amp;hardware</dt>
+        <dd>DaVinci Resolve Studio, Nikon ZR</dd>
+      </div>
+    </dl>
+  </main>
+
+  <script src="js/movie.js"></script>
+</body>
+</html>

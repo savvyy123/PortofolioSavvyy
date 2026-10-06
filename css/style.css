@@ -7,6 +7,23 @@
 }
 
 @font-face {
+  font-family: "Neue Haas Grotesk Display Round";
+  src: url("../fonts/en/NeueHaasGrotDispRound/NeueHaasGrotDispRound-45Light-Trial.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* top の作品タイトル用（Round ではない Display） */
+@font-face {
+  font-family: "Neue Haas Grotesk Display";
+  src: url("../fonts/en/NeueHaasGrotDisp/NeueHaasGrotDisp-55Roman-Trial.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "AXIS Std";
   src: url("../fonts/ja/AxisStd/AxisStd-Light.otf") format("opentype");
   font-weight: 300;
@@ -71,6 +88,7 @@ ul {
   display: flex;
   gap: 56px;
   font-size: 20px;
+  font-weight: 300;
   letter-spacing: -0.01em;
 }
 
@@ -113,13 +131,14 @@ ul {
   background: #d9d9d9;
 }
 
-/* 枠の下 24px の帯にキャプション（Figma: 12px、左 +5） */
+/* 枠の下 24px の帯にキャプション（Figma: Neue Haas Grotesk Display 55 Roman 12px、枠のすぐ下・左 +5） */
 .work__title {
   height: 24px;
-  padding: 6px 0 0 5px;
+  padding-left: 5px;
+  font-family: "Neue Haas Grotesk Display", sans-serif;
   font-size: 12px;
   font-weight: 400;
-  line-height: 1;
+  line-height: 14px;
   letter-spacing: -0.01em;
 }
 
@@ -305,4 +324,37 @@ body.is-loading {
   font-size: 20px;
   font-weight: 300;
   line-height: 2;
+}
+
+/* ---- Movie ページ（Figma 71:120） ---- */
+
+/* メイン：縦動画も切らずに見せる */
+.movie-hero video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 2 列（各 600）。左右の列は高さをそろえずに下へ詰める */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+  width: min(1200px, 100% - 2 * var(--gutter));
+  margin: 120px auto 0;
+}
+
+.movie-tile {
+  display: block;
+  width: 100%;
+  aspect-ratio: 600 / 338;
+  object-fit: cover;
+}
+
+/* 縦動画は 338×600 で列の中央に */
+.movie-tile--vertical {
+  width: calc(338 / 600 * 100%);
+  aspect-ratio: 338 / 600;
+  margin-inline: auto;
 }
