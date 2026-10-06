@@ -1,0 +1,7 @@
+.DS_Store
+
+# 画像は WebP に変換したものだけ使う。元画像（PNG / JPG）は入れない
+assets/**/*.png
+assets/**/*.PNG
+assets/**/*.jpg
+assets/**/*.JPG

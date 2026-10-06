@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ishikawa Sota</title>
+  <link rel="preload" href="fonts/en/NeueHaasGrotDispRound/NeueHaasGrotDispRound-55Roman-Trial.otf" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-loading">
+  <!-- ローディング画面：S ロゴのスイープ（座標は logo.svg と同じ） -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <svg class="loader__logo" viewBox="813.54 390 320 240">
+      <path class="loader__mark" id="loader-mark" d=""></path>
+      <text class="loader__name" x="973.54" y="616.15" text-anchor="middle">Ishikawa Sota</text>
+    </svg>
+  </div>
+
+  <!-- top（Figma: ポートフォリオ / top 19:2、1440px 幅） -->
+  <header class="header">
+    <h1 class="header__name">Ishikawa Sota</h1>
+    <nav class="header__nav">
+      <a href="#profile">profile</a>
+      <a href="#movie">movie</a>
+      <a href="#poster">poster</a>
+      <a href="#words">words</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- 画像のトリミングは Figma の配置をそのまま再現（--w/--h が画像の大きさ、--x/--y がずれ。枠に対する %） -->
+    <ul class="works">
+      <li class="work">
+        <a href="works/spotify-lyric-motion.html">
+          <div class="work__thumb">
+            <img src="assets/spotify_LyricMotion.webp" alt="Spotify_LyricMotion" style="--w: 244.44%; --h: 158.76%; --x: -77.92%; --y: -33.64%;">
+          </div>
+          <p class="work__title">Spotify_LyricMotion</p>
+        </a>
+      </li>
+      <li class="work">
+        <a href="works/the-wind-is-by-my-side.html">
+          <div class="work__thumb">
+            <img src="assets/TheWindIsByMySide.webp" alt="The wind is by my side." style="--w: 185.55%; --h: 104.37%; --x: -34.83%; --y: -2.22%;">
+          </div>
+          <p class="work__title">The wind is by my side.</p>
+        </a>
+      </li>
+      <li class="work">
+        <div class="work__thumb work__thumb--cover">
+          <img src="assets/moca.webp" alt="moca">
+        </div>
+        <p class="work__title">moca</p>
+      </li>
+      <li class="work">
+        <div class="work__thumb">
+          <img src="assets/Zine.webp" alt="zine" style="--w: 100%; --h: 133.33%; --x: 0%; --y: -22.68%;">
+        </div>
+        <p class="work__title">zine</p>
+      </li>
+      <!-- 空き枠（Figma のグレーの枠） -->
+      <li class="work work--empty"><div class="work__thumb"></div></li>
+      <li class="work work--empty"><div class="work__thumb"></div></li>
+      <li class="work work--empty"><div class="work__thumb"></div></li>
+      <li class="work work--empty"><div class="work__thumb"></div></li>
+      <li class="work work--empty"><div class="work__thumb"></div></li>
+    </ul>
+  </main>
+
+  <script src="js/loading.js"></script>
+</body>
+</html>

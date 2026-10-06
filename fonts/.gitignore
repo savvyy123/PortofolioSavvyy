@@ -1,0 +1,7 @@
+# フォントはサイトで使っているものだけリポジトリに入れる
+*.otf
+*.ttf
+*.woff
+*.woff2
+!en/NeueHaasGrotDispRound/NeueHaasGrotDispRound-55Roman-Trial.otf
+!ja/AxisStd/AxisStd-Light.otf

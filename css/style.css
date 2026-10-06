@@ -1,0 +1,287 @@
+@font-face {
+  font-family: "Neue Haas Grotesk Display Round";
+  src: url("../fonts/en/NeueHaasGrotDispRound/NeueHaasGrotDispRound-55Roman-Trial.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "AXIS Std";
+  src: url("../fonts/ja/AxisStd/AxisStd-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-ink: #040000;
+  --color-bg: #fff;
+  --font-en: "Neue Haas Grotesk Display Round", sans-serif;
+  --font-ja: "AXIS Std", sans-serif;
+  --gutter: 120px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-en);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---- top（Figma 1440px 幅：左右 120 / 3 列 360 / 列間 60 / 行間 120） ---- */
+
+.header,
+.works {
+  width: min(1200px, 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+/* 名前と nav のベースラインを Figma の y≈120 にそろえ、作品は y=240 から */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 240px;
+  padding-top: 94.5px;
+  line-height: 1;
+}
+
+/* ローディングの文字と同じ見た目の大きさ（42.95 × 表示倍率 240/320） */
+.header__name {
+  font-size: 32.21px;
+  font-weight: 400;
+}
+
+.header__nav {
+  display: flex;
+  gap: 56px;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+
+.works {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 60px;
+  row-gap: 96px;
+  padding-bottom: 573px;
+}
+
+.work__thumb {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.work__thumb img {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+  max-width: none;
+}
+
+.work__thumb--cover {
+  background: rgba(233, 233, 233, 0.3);
+}
+
+.work__thumb--cover img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work--empty .work__thumb {
+  background: #d9d9d9;
+}
+
+/* 枠の下 24px の帯にキャプション（Figma: 12px、左 +5） */
+.work__title {
+  height: 24px;
+  padding: 6px 0 0 5px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+body.is-loading {
+  overflow: hidden;
+}
+
+/* ---- ローディング ---- */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--color-bg);
+  transition: opacity 400ms ease;
+}
+
+.loader.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* viewBox は 320 単位。表示幅 240px で logo.svg の 75%（線幅も 1.5 → 約 1.1px） */
+.loader__logo {
+  width: 240px;
+  max-width: 80vw;
+  height: auto;
+  overflow: visible;
+}
+
+.loader__mark {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1.5;
+  stroke-linejoin: miter;
+  stroke-miterlimit: 10;
+}
+
+/* 大文字の高さを logo.svg の文字（30.71）に合わせたサイズ */
+.loader__name {
+  font-family: var(--font-en);
+  font-size: 42.95px;
+  font-weight: 400;
+  fill: var(--color-ink);
+  opacity: 0;
+}
+
+/* 文字：1600ms から 800ms かけてフェードイン（Cavalry のフレーム 40→60） */
+.loader.is-playing .loader__name {
+  animation: loader-name-in 800ms ease-out 1600ms forwards;
+}
+
+@keyframes loader-name-in {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader.is-playing .loader__name {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ---- 作品ページ（Figma「作品１」1440px 幅：左右 120 / 本文幅 1200） ---- */
+
+.work-hero,
+.work-gallery,
+.work-info {
+  width: min(1200px, 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+/* 左 300：タイトル / 右 900：メイン画像（900×506） */
+.work-hero {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.work-hero__text {
+  padding-top: 202px;
+}
+
+.work-hero__title {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.work-hero__category {
+  margin-top: 7px;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.work-hero__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 900 / 506;
+  object-fit: cover;
+  border: 0;
+}
+
+/* YouTube：プレーヤーの縁と動画下端に黒い線が出るので、4px ずつ大きく置いて枠で切り落とす */
+.work-hero__media {
+  overflow: hidden;
+}
+
+.work-hero__media iframe {
+  display: block;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  margin: -4px;
+  border: 0;
+}
+
+/* 日本語タイトル（Figma: ヒラギノ明朝 W6。Mac 以外は明朝体で代用） */
+.work-hero--mincho .work-hero__text {
+  padding-top: 222px;
+}
+
+.work-hero--mincho .work-hero__title {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.work-hero--mincho .work-hero__category {
+  margin-top: 23px;
+}
+
+/* 2×2、各 600×338、すき間なし */
+.work-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 120px;
+}
+
+.work-gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 600 / 338;
+  object-fit: cover;
+}
+
+.work-info {
+  display: grid;
+  gap: 52px;
+  margin-top: 240px;
+  padding-bottom: 147px;
+  text-align: center;
+}
+
+.work-info dt {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.work-info dd {
+  font-family: var(--font-ja);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 2;
+}
