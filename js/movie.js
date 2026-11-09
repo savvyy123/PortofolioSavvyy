@@ -82,6 +82,7 @@ const MOVIES = [
 // 戻り値：置く順の [{ movie, column }]（column は 0 = 左 / 1 = 右）
 function layoutColumns(movies) {
   const H = 338 / 600, V = 1, EPS = 1e-6;  // 列幅を 1 としたときの高さ
+  const G = 6 / 597;      // 動画どうしのすき間 6px（列幅 597px のとき）
   const LOOKAHEAD = 4;     // 何本先まで順番を入れ替えてよいか
   const MAX_DIFF = 1.2;    // 左右の列の長さの差の上限
   const MAX_STEPS = 300000;
@@ -93,7 +94,7 @@ function layoutColumns(movies) {
     if (remaining.length === 0) { bestCost = cost; best = placed.slice(); return; }
     for (let k = 0; k < Math.min(LOOKAHEAD, remaining.length); k++) {
       const m = remaining[k];
-      const size = m.vertical ? V : H;
+      const size = (m.vertical ? V : H) + G;
       for (const c of heights[1] < heights[0] - EPS ? [1, 0] : [0, 1]) {
         const top = heights[c];
         if (Math.abs(top + size - heights[1 - c]) > MAX_DIFF) continue;
