@@ -18,6 +18,15 @@
   const loader = document.getElementById("loader");
   const mark = document.getElementById("loader-mark");
 
+  // 同じタブで一度見ていたら（Movie などからロゴで戻ってきたとき）再生しない
+  // 判定は index.html の <head>。sessionStorage はタブを閉じると消えるので、新しく開いたときはまた再生される
+  const SEEN_KEY = "loaderSeen";
+  if (document.documentElement.classList.contains("is-loader-seen")) {
+    loader.remove();
+    document.body.classList.remove("is-loading");
+    return;
+  }
+
   // CSS の ease-in-out と同じ曲線（Cavalry の SlowInSlowOut の代わり）
   const easeInOut = cubicBezier(0.42, 0, 0.58, 1);
 
@@ -66,6 +75,7 @@
   }
 
   function finish() {
+    try { sessionStorage.setItem(SEEN_KEY, "1"); } catch (e) {}
     loader.classList.add("is-done");
     document.body.classList.remove("is-loading");
     loader.addEventListener("transitionend", () => loader.remove(), { once: true });

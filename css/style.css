@@ -158,6 +158,15 @@ body.is-loading {
   overflow: hidden;
 }
 
+/* 同じタブで一度見たあと（index.html の <head> で付ける）：ローディングを最初から出さない */
+.is-loader-seen .loader {
+  display: none;
+}
+
+.is-loader-seen body.is-loading {
+  overflow: visible;
+}
+
 /* ---- ローディング ---- */
 
 .loader {

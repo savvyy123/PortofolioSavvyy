@@ -6,6 +6,10 @@
   <title>Ishikawa Sota</title>
   <link rel="preload" href="fonts/en/NeueHaasGrotDispRound/NeueHaasGrotDispRound-55Roman-Trial.otf" as="font" type="font/otf" crossorigin>
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    // 同じタブでローディングを一度見ていたら、もう出さない（記録は js/loading.js。描画前に判定して一瞬も出さない）
+    try { if (sessionStorage.getItem("loaderSeen")) document.documentElement.classList.add("is-loader-seen"); } catch (e) {}
+  </script>
 </head>
 <body class="is-loading">
   <!-- ローディング画面：S ロゴのスイープ（座標は logo.svg と同じ） -->
