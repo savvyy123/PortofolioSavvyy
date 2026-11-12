@@ -245,8 +245,10 @@ body.is-loading {
   line-height: 1.2;
 }
 
+/* 「製本」など英語フォントにない日本語は AXIS で表示する */
 .work-hero__category {
   margin-top: 7px;
+  font-family: "Neue Haas Grotesk Display Round", "AXIS Std", sans-serif;
   font-size: 32px;
   line-height: 1.2;
 }
@@ -257,6 +259,11 @@ body.is-loading {
   aspect-ratio: 900 / 506;
   object-fit: cover;
   border: 0;
+}
+
+/* 写真を切らずに枠の中央へ（左右は白。Zine の縦写真、Your BALM. の写真） */
+.work-hero__image--contain {
+  object-fit: contain;
 }
 
 /* YouTube：プレーヤーの縁と動画下端に黒い線が出るので、4px ずつ大きく置いて枠で切り落とす */
