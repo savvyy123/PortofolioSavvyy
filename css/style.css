@@ -470,27 +470,29 @@ body.is-loading {
 
 /* ---- University（Figma 122:3：中央に学校名、左に学年、右に授業名を横に並べる） ---- */
 
-/* 学校名を y=191 に置く（ヘッダーの 240 から 49 上げる）。下の余白は Figma の高さ 1024 に合わせる */
+/* 学校名を y=218 に置く（ヘッダーの 240 から 22 上げる）。下の余白は Figma の高さ 1024 に合わせる */
 .university {
   width: min(1200px, 100% - 2 * var(--gutter));
-  margin: -49px auto 0;
+  margin: -22px auto 0;
   padding-bottom: 444px;
 }
 
+/* 中央ぞろえで、ページの中央から右へ 28px（Figma: left calc(50% + 28px)） */
 .university__school {
   font-size: 20px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-align: center;
+  translate: 28px 0;
 }
 
-/* 左 240：学年 / 右：授業名（x=360 から） */
+/* 左 240：学年 / 右：授業名（x=360 から）。学年と授業名の 1 段目は y=368 */
 .university__grade {
   display: grid;
   grid-template-columns: 240px 1fr;
   align-items: start;
-  margin-top: 129px;
+  margin-top: 102px;
 }
 
 .university__year,
@@ -524,4 +526,70 @@ body.is-loading {
 
 .university__courses li {
   white-space: nowrap;
+}
+
+/* ホバーした授業の写真（Figma 144:6 ほか）：y=162〜840 の帯に画面幅いっぱいで敷き、黒を重ねて文字を白に */
+.university-page {
+  position: relative;
+}
+
+.university-page .header,
+.university-page .university {
+  position: relative;
+  z-index: 1;
+}
+
+.university {
+  transition: color 600ms ease;
+}
+
+.university-page.is-backdrop .university {
+  color: #fff;
+}
+
+/* 帯は高さ 678。写真は Figma と同じく高さ 862 の枠に cover で置き、帯の下で切る（下 184 は白） */
+.university-backdrop {
+  position: absolute;
+  top: 162px;
+  left: 0;
+  right: 0;
+  height: 678px;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.university-backdrop__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 862px;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.university-backdrop__item.is-active {
+  opacity: 1;
+}
+
+.university-backdrop__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.university-backdrop__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--shade, 0.5));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .university,
+  .university-backdrop__item {
+    transition: none;
+  }
 }

@@ -6,8 +6,18 @@
   <title>University | Ishikawa Sota</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <!-- University（Figma: ポートフォリオ / University 122:3、1440px 幅） -->
+<body class="university-page">
+  <!-- University（Figma: ポートフォリオ / University 122:3、ホバー時は 144:6 ほか、1440px 幅） -->
+
+  <!-- 授業名にホバーしたときの写真（data-bg と同じ名前の id。--shade は上に重ねる黒の濃さ） -->
+  <div class="university-backdrop" aria-hidden="true">
+    <div class="university-backdrop__item" id="bg-moca" style="--shade: 0.5"><img src="assets/university/moca.webp" alt="" decoding="async"></div>
+    <div class="university-backdrop__item" id="bg-palette-world" style="--shade: 0.3"><img src="assets/university/palette-world.webp" alt="" decoding="async"></div>
+    <div class="university-backdrop__item" id="bg-zine" style="--shade: 0.5"><img src="assets/university/zine.webp" alt="" decoding="async"></div>
+    <div class="university-backdrop__item" id="bg-the-wind-is-by-my-side" style="--shade: 0.5"><img src="assets/university/the-wind-is-by-my-side.webp" alt="" decoding="async"></div>
+    <div class="university-backdrop__item" id="bg-your-balm" style="--shade: 0.5"><img src="assets/university/your-balm.webp" alt="" decoding="async"></div>
+  </div>
+
   <header class="header">
     <a class="header__name" href="index.html">Ishikawa Sota</a>
     <nav class="header__nav">
@@ -26,21 +36,22 @@
       <!-- 字間は Figma で調整したもの（カタカナは ls-p15 = 0.15em、ほかは 0.2em。css の「1 字ずつの字間」を参照） -->
       <div class="university__courses">
         <ul>
-          <li><a class="ls-p15" href="works/moca.html">ビジュアルランゲージ</a></li>
-          <li><a class="ls-p15" href="works/palette-world.html">エクスペリエンスデザイン</a></li>
-          <li><a class="ls-p15" href="works/zine.html">インフォメーションスケッチ</a></li>
+          <li><a class="ls-p15" href="works/moca.html" data-bg="moca">ビジュアルランゲージ</a></li>
+          <li><a class="ls-p15" href="works/palette-world.html" data-bg="palette-world">エクスペリエンスデザイン</a></li>
+          <li><a class="ls-p15" href="works/zine.html" data-bg="zine">インフォメーションスケッチ</a></li>
         </ul>
         <ul>
           <li><span class="ls-p15">プログラミング</span>基礎</li>
           <li>構造設計</li>
         </ul>
         <ul class="university__wide">
-          <li><a href="works/the-wind-is-by-my-side.html">社会<span class="ls-p15">デザイ</span><span class="ls-p30">ンー</span>林 響太朗演<span class="ls-m20">習</span><span class="ls-p30"> </span>(有志参加)</a></li>
-          <li><a href="works/your-balm.html">社会<span class="ls-p15">デザイ</span><span class="ls-p30">ンー</span>黒谷 優実演<span class="ls-p30">習</span>(有志参加)</a></li>
+          <li><a href="works/the-wind-is-by-my-side.html" data-bg="the-wind-is-by-my-side">社会<span class="ls-p15">デザイ</span><span class="ls-p30">ンー</span>林 響太朗演<span class="ls-m20">習</span><span class="ls-p30"> </span>(有志参加)</a></li>
+          <li><a href="works/your-balm.html" data-bg="your-balm">社会<span class="ls-p15">デザイ</span><span class="ls-p30">ンー</span>黒谷 優実演<span class="ls-p30">習</span>(有志参加)</a></li>
         </ul>
       </div>
     </section>
   </main>
 
+  <script src="js/university.js"></script>
 </body>
 </html>
