@@ -108,12 +108,13 @@ ul {
   letter-spacing: -0.01em;
 }
 
+/* 2 段（6 作品）でページの高さを Figma の 1300 に合わせる（最後のキャプションの帯の下 196） */
 .works {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 60px;
   row-gap: 96px;
-  padding-bottom: 573px;
+  padding-bottom: 196px;
 }
 
 .work__thumb {
@@ -141,10 +142,6 @@ ul {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.work--empty .work__thumb {
-  background: #d9d9d9;
 }
 
 /* 枠の下 24px の帯にキャプション（Figma: Neue Haas Grotesk Display 55 Roman 16px、枠のすぐ下・左端をそろえる） */
@@ -539,12 +536,15 @@ body.is-loading {
   z-index: 1;
 }
 
+/* フェードは 出るとき 0.9 秒 / 消えるとき 1.2 秒（ふだんの状態に書いた方が「消える」ときに使われる）
+   どちらも ease-in-out で、最初に一気に変わらないようにする */
 .university {
-  transition: color 600ms ease;
+  transition: color 1200ms ease-in-out;
 }
 
 .university-page.is-backdrop .university {
   color: #fff;
+  transition-duration: 900ms;
 }
 
 /* 帯は高さ 678。写真は Figma と同じく高さ 862 の枠に cover で置き、帯の下で切る（下 184 は白） */
@@ -566,11 +566,12 @@ body.is-loading {
   right: 0;
   height: 862px;
   opacity: 0;
-  transition: opacity 600ms ease;
+  transition: opacity 1200ms ease-in-out;
 }
 
 .university-backdrop__item.is-active {
   opacity: 1;
+  transition-duration: 900ms;
 }
 
 .university-backdrop__item img {
