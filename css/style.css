@@ -458,13 +458,15 @@ body.is-loading {
   margin-top: 32px;
 }
 
-/* 1 字ずつの字間（Figma のトラッキング。m = マイナス、p = プラス、数字は 1/100 em） */
+/* 1 字ずつの字間（Figma のトラッキング。Profile と University で使う。m = マイナス、p = プラス、数字は 1/100 em） */
 .ls-m30 { letter-spacing: -0.3em; }
 .ls-m22 { letter-spacing: -0.22em; }
 .ls-m20 { letter-spacing: -0.2em; }
 .ls-m1 { letter-spacing: -0.01em; }
 .ls-p5 { letter-spacing: 0.05em; }
 .ls-p10 { letter-spacing: 0.1em; }
+.ls-p15 { letter-spacing: 0.15em; }
+.ls-p30 { letter-spacing: 0.3em; }
 
 /* ---- University（Figma 122:3：中央に学校名、左に学年、右に授業名を横に並べる） ---- */
 
@@ -503,16 +505,23 @@ body.is-loading {
   font-weight: 400;
 }
 
-/* 段の間は 58px（1 行 32px と合わせて 90px ごと）。授業名どうしの間は全段 60px にそろえる
-   （字間 0.2em が最後の字のうしろにも付くので、見た目の間隔は Figma 1 段目の 63px になる） */
+/* 段の間は 58px（1 行 32px と合わせて 90px ごと） */
 .university__courses {
   display: grid;
   gap: 58px;
   font-weight: 300;
 }
 
+/* 授業名の列（Figma）：2 列目は x=620、3 列目は x=903。演習の段は名前が長いので 2 つ目を x=806 に */
 .university__courses ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 58px 60px;
+  display: grid;
+  grid-template-columns: 260px 283px max-content;
+}
+
+.university__courses .university__wide {
+  grid-template-columns: 446px max-content;
+}
+
+.university__courses li {
+  white-space: nowrap;
 }
