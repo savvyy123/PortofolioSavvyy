@@ -147,14 +147,13 @@ ul {
   background: #d9d9d9;
 }
 
-/* 枠の下 24px の帯にキャプション（Figma: Neue Haas Grotesk Display 55 Roman 12px、枠のすぐ下・左 +5） */
+/* 枠の下 24px の帯にキャプション（Figma: Neue Haas Grotesk Display 55 Roman 16px、枠のすぐ下・左端をそろえる） */
 .work__title {
   height: 24px;
-  padding-left: 5px;
   font-family: "Neue Haas Grotesk Display", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 14px;
+  line-height: 19px;
   letter-spacing: -0.01em;
 }
 
@@ -424,14 +423,31 @@ body.is-loading {
   padding-bottom: 247px;
 }
 
-.profile__name {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.2;
+/* 名前（AXIS Medium 24px）の右 16px に読み仮名（12px）。ベースラインをそろえる */
+.profile__heading {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
 }
 
+.profile__name,
+.profile__kana {
+  font-family: var(--font-ja);
+  font-weight: 500;
+  line-height: 2;
+}
+
+.profile__name {
+  font-size: 24px;
+}
+
+.profile__kana {
+  font-size: 12px;
+}
+
+/* 名前の行（高さ 48px）の下 30px から本文（Figma y=318） */
 .profile__text {
-  margin-top: 49px;
+  margin-top: 30px;
   font-family: var(--font-ja);
   font-size: 16px;
   font-weight: 500;
