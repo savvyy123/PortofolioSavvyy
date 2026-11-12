@@ -458,6 +458,14 @@ body.is-loading {
   margin-top: 32px;
 }
 
+/* 1 字ずつの字間（Figma のトラッキング。m = マイナス、p = プラス、数字は 1/100 em） */
+.ls-m30 { letter-spacing: -0.3em; }
+.ls-m22 { letter-spacing: -0.22em; }
+.ls-m20 { letter-spacing: -0.2em; }
+.ls-m1 { letter-spacing: -0.01em; }
+.ls-p5 { letter-spacing: 0.05em; }
+.ls-p10 { letter-spacing: 0.1em; }
+
 /* ---- University（Figma 122:3：中央に学校名、左に学年、右に授業名を横に並べる） ---- */
 
 /* 学校名を y=191 に置く（ヘッダーの 240 から 49 上げる）。下の余白は Figma の高さ 1024 に合わせる */
