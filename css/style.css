@@ -84,13 +84,13 @@ ul {
   margin-inline: auto;
 }
 
-/* 名前と nav のベースラインを Figma の y≈102 にそろえ、本文は y=240 から */
+/* 全ページ共通（Figma 171:2）：名前と nav のベースラインを y≈80 にそろえ、本文は y=180 から */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  height: 240px;
-  padding-top: 75.5px;
+  height: 180px;
+  padding-top: 53.5px;
   line-height: 1;
 }
 
@@ -108,13 +108,13 @@ ul {
   letter-spacing: -0.01em;
 }
 
-/* 2 段（6 作品）でページの高さを Figma の 1300 に合わせる（最後のキャプションの帯の下 196） */
+/* 2 段（6 作品）でページの高さを Figma の 1300 に合わせる（最後のキャプションの帯の下 256） */
 .works {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 60px;
   row-gap: 96px;
-  padding-bottom: 196px;
+  padding-bottom: 256px;
 }
 
 .work__thumb {
@@ -366,7 +366,7 @@ body.is-loading {
   display: grid;
   gap: 52px;
   margin-top: 240px;
-  padding-bottom: 147px;
+  padding-bottom: 207px;
   text-align: center;
 }
 
@@ -426,7 +426,7 @@ body.is-loading {
 .profile {
   width: min(902px, 100% - 2 * var(--gutter));
   margin-inline: auto;
-  padding-bottom: 247px;
+  padding-bottom: 307px;
 }
 
 /* 名前（AXIS Medium 24px）の右 16px に読み仮名（12px）。ベースラインをそろえる */
@@ -451,7 +451,7 @@ body.is-loading {
   font-size: 12px;
 }
 
-/* 名前の行（高さ 48px）の下 30px から本文（Figma y=318） */
+/* 名前の行（高さ 48px）の下 30px から本文（Figma y=258） */
 .profile__text {
   margin-top: 30px;
   font-family: var(--font-ja);
@@ -476,11 +476,11 @@ body.is-loading {
 
 /* ---- University（Figma 122:3：中央に学校名、左に学年、右に授業名を横に並べる） ---- */
 
-/* 学校名を y=218 に置く（ヘッダーの 240 から 22 上げる）。下の余白は Figma の高さ 1024 に合わせる */
+/* 学校名を y=158 に置く（ヘッダーの下端 180 から 22 上げる）。下の余白は Figma の高さ 1024 に合わせる */
 .university {
   width: min(1200px, 100% - 2 * var(--gutter));
   margin: -22px auto 0;
-  padding-bottom: 444px;
+  padding-bottom: 504px;
 }
 
 /* 中央ぞろえで、ページの中央から右へ 28px（Figma: left calc(50% + 28px)） */
@@ -493,7 +493,7 @@ body.is-loading {
   translate: 28px 0;
 }
 
-/* 左 240：学年 / 右：授業名（x=360 から）。学年と授業名の 1 段目は y=368 */
+/* 左 240：学年 / 右：授業名（x=360 から）。学年と授業名の 1 段目は y=308 */
 .university__grade {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -534,7 +534,7 @@ body.is-loading {
   white-space: nowrap;
 }
 
-/* ホバーした授業の写真（Figma 144:6 ほか）：y=162〜840 の帯に画面幅いっぱいで敷き、黒を重ねて文字を白に */
+/* ホバーした授業の写真（Figma 144:6 ほか）：y=102〜780 の帯に画面幅いっぱいで敷き、黒を重ねて文字を白に */
 .university-page {
   position: relative;
 }
@@ -556,10 +556,10 @@ body.is-loading {
   transition-duration: 900ms;
 }
 
-/* 帯は高さ 678。写真は Figma と同じく高さ 862 の枠に cover で置き、帯の下で切る（下 184 は白） */
+/* 帯は y=102 から高さ 678。写真は Figma と同じく高さ 862 の枠に cover で置き、帯の下で切る（下 184 は白） */
 .university-backdrop {
   position: absolute;
-  top: 162px;
+  top: 102px;
   left: 0;
   right: 0;
   height: 678px;
