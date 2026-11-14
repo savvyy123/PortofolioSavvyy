@@ -333,6 +333,7 @@ body.is-loading {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.02);
+  pointer-events: none;
 }
 
 /* 画像の上に薄いグレーを重ねる（Figma: rgba(233,233,233,0.3)） */
@@ -345,6 +346,7 @@ body.is-loading {
   position: absolute;
   inset: 0;
   background: rgba(233, 233, 233, 0.3);
+  pointer-events: none;  /* 下の写真をクリックできるように */
 }
 
 /* 左に縦長の 1 枚、右に 3 枚を縦に積む（Palette World） */
@@ -380,6 +382,111 @@ body.is-loading {
   font-size: 20px;
   font-weight: 300;
   line-height: 2;
+}
+
+/* ---- 写真の拡大表示（Figma 179:67、js/lightbox.js） ---- */
+
+.is-zoomable {
+  cursor: zoom-in;
+}
+
+/* キーボードで選んだときの目印は、線と同じ細い黒線に */
+.is-zoomable:focus-visible,
+.lightbox button:focus-visible {
+  outline: 1.5px solid var(--color-ink);
+  outline-offset: 4px;
+}
+
+.lightbox:focus {
+  outline: none;
+}
+
+/* 開いている間はページをスクロールさせない */
+html.is-lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--color-bg);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms ease, visibility 0s linear 400ms;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 400ms ease, visibility 0s;
+}
+
+/* 写真の枠：1440 幅の画面で x=120・y=120 から 1200×746（下は 158 あける）。写真は切らずに中央へ */
+.lightbox__frame {
+  position: absolute;
+  top: 120px;
+  bottom: 158px;
+  left: 50%;
+  width: min(1200px, 100% - 2 * var(--gutter));
+  translate: -50% 0;
+}
+
+.lightbox__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 200ms ease;
+}
+
+/* 高解像度の画像を読み込んでいる間は出さない（写真の切り替わりで枠が一瞬ずれないように） */
+.lightbox__image.is-loading {
+  opacity: 0;
+}
+
+.lightbox button {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.lightbox svg {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+/* × は枠の右上の角に約 35×35（腕の長さ 50） */
+.lightbox__close {
+  top: 0;
+  right: 0;
+}
+
+/* < > は約 18×35（腕の長さ 25）。枠の上下の真ん中で、外側の端が画面の端から 60（1440 幅で x=60〜78 と 1362〜1380） */
+.lightbox__prev,
+.lightbox__next {
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.lightbox__prev {
+  left: -60px;
+}
+
+.lightbox__next {
+  right: -60px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox.is-open {
+    transition: none;
+  }
 }
 
 /* ---- Movie ページ（Figma 71:120） ---- */
