@@ -183,7 +183,7 @@ a.header__name::before,
   content: "";
   position: absolute;
   z-index: -1;
-  inset: -0.1em -0.2em;
+  inset: 0;  /* 文字の幅と高さぎりぎり */
   background: var(--color-ink);
   transform: scaleX(0);
   transform-origin: right center;
@@ -209,6 +209,15 @@ a.header__name:is(:hover, :focus-visible)::before,
   transform: scaleX(1);
   transform-origin: left center;
   transition: transform var(--band-time) var(--band-ease);
+}
+
+/* University の授業名は字間（0.2em、カタカナだけの名前は 0.15em）が最後の文字のうしろにも付くので、その分だけ帯の右を縮める */
+.university__courses a::before {
+  right: 0.2em;
+}
+
+.university__courses a.ls-p15::before {
+  right: 0.15em;
 }
 
 @media (prefers-reduced-motion: reduce) {
