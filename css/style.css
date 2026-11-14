@@ -145,13 +145,80 @@ ul {
 }
 
 /* 枠の下 24px の帯にキャプション（Figma: Neue Haas Grotesk Display 55 Roman 16px、枠のすぐ下・左端をそろえる） */
+/* 帯（19 + 下 5 = 24）。幅は文字ぶんだけにして、ホバーの黒い帯を文字にそろえる */
 .work__title {
-  height: 24px;
+  width: fit-content;
+  height: 19px;
+  margin-bottom: 5px;
   font-family: "Neue Haas Grotesk Display", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
   letter-spacing: -0.01em;
+}
+
+/* ---- 文字のホバー：黒い帯が左から伸びるのと同時に、文字が白くフェードインする ----
+   外したら、帯が右へ縮んで抜けるのと同時に文字が元の色へ戻る
+   対象：ヘッダーのメニューと名前 / top の作品タイトル（文字に乗せたとき。写真は別のホバーにする）/ Profile のメール / University の授業名 */
+:root {
+  --band-time: 350ms;
+  --band-ease: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+a.header__name,
+.header__nav a,
+.work__title,
+.profile__text a,
+.university__courses a {
+  position: relative;
+  z-index: 0;  /* 帯を文字のうしろ・背景の前に置く */
+  transition: color var(--band-time) ease;
+}
+
+a.header__name::before,
+.header__nav a::before,
+.work__title::before,
+.profile__text a::before,
+.university__courses a::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -0.1em -0.2em;
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform var(--band-time) var(--band-ease);
+  pointer-events: none;
+}
+
+a.header__name:is(:hover, :focus-visible),
+.header__nav a:is(:hover, :focus-visible),
+.work__title:hover,
+.work a:focus-visible .work__title,
+.profile__text a:is(:hover, :focus-visible),
+.university__courses a:is(:hover, :focus-visible) {
+  color: #fff;
+}
+
+a.header__name:is(:hover, :focus-visible)::before,
+.header__nav a:is(:hover, :focus-visible)::before,
+.work__title:hover::before,
+.work a:focus-visible .work__title::before,
+.profile__text a:is(:hover, :focus-visible)::before,
+.university__courses a:is(:hover, :focus-visible)::before {
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform var(--band-time) var(--band-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.header__name::before,
+  .header__nav a::before,
+  .work__title::before,
+  .profile__text a::before,
+  .university__courses a::before {
+    transition: none;
+  }
 }
 
 body.is-loading {
@@ -432,12 +499,19 @@ html.is-lightbox-open {
   translate: -50% 0;
 }
 
-.lightbox__image {
+.lightbox__image,
+.lightbox__video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   transition: opacity 200ms ease;
+}
+
+/* 写真と動画はどちらか一方だけ出す */
+.lightbox__image[hidden],
+.lightbox__video[hidden] {
+  display: none;
 }
 
 /* 高解像度の画像を読み込んでいる間は出さない（写真の切り替わりで枠が一瞬ずれないように） */
@@ -452,6 +526,18 @@ html.is-lightbox-open {
   background: none;
   color: var(--color-ink);
   cursor: pointer;
+  transition: opacity 300ms ease;
+}
+
+/* 3 秒操作がないとき（js/lightbox.js が is-idle を付ける）：× と < > は 1 秒かけて消え、カーソルも隠す。操作で 0.3 秒で戻る */
+.lightbox.is-idle button {
+  opacity: 0;
+  transition-duration: 1000ms;
+}
+
+.lightbox.is-idle,
+.lightbox.is-idle * {
+  cursor: none;
 }
 
 .lightbox svg {
@@ -653,7 +739,7 @@ html.is-lightbox-open {
 }
 
 /* フェードは 出るとき 0.9 秒 / 消えるとき 1.2 秒（ふだんの状態に書いた方が「消える」ときに使われる）
-   どちらも ease-in-out で、最初に一気に変わらないようにする */
+   どちらも ease-in-out で、最初に一気に変わらないようにする（写真のホバーアニメーションは別に作る予定） */
 .university {
   transition: color 1200ms ease-in-out;
 }

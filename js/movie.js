@@ -46,6 +46,7 @@ const MOVIES = [
     video.playsInline = true;
     video.preload = "none";
     video.setAttribute("aria-label", m.date.replaceAll("-", "."));
+    video.dataset.order = movies.indexOf(m);  // 拡大表示（js/lightbox.js）で新しい順に送るため
     columns[i].append(video);
     tiles.push(video);
   });
