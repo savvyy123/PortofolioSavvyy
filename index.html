@@ -23,12 +23,16 @@
   <!-- top（Figma: ポートフォリオ / top 19:2、1440px 幅） -->
   <header class="header">
     <h1 class="header__name">Ishikawa Sota</h1>
-    <nav class="header__nav">
+    <nav class="header__nav" id="site-nav">
       <a href="profile.html">Profile</a>
       <a href="movie.html">Movie</a>
       <a href="university.html">University</a>
       <a>Blog</a>
     </nav>
+    <!-- スマホ：メニューを開く三本線（js/menu.js） -->
+    <button class="header__menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <main id="main">
@@ -86,5 +90,6 @@
   </main>
 
   <script src="js/loading.js"></script>
+  <script src="js/menu.js"></script>
 </body>
 </html>

@@ -191,24 +191,27 @@ a.header__name::before,
   pointer-events: none;
 }
 
-a.header__name:is(:hover, :focus-visible),
-.header__nav a:is(:hover, :focus-visible),
-.work__title:hover,
-.work a:focus-visible .work__title,
-.profile__text a:is(:hover, :focus-visible),
-.university__courses a:is(:hover, :focus-visible) {
-  color: #fff;
-}
+/* マウスのある画面だけ（スマホでタップしたあとに帯が残らないように） */
+@media (hover: hover) {
+  a.header__name:is(:hover, :focus-visible),
+  .header__nav a:is(:hover, :focus-visible),
+  .work__title:hover,
+  .work a:focus-visible .work__title,
+  .profile__text a:is(:hover, :focus-visible),
+  .university__courses a:is(:hover, :focus-visible) {
+    color: #fff;
+  }
 
-a.header__name:is(:hover, :focus-visible)::before,
-.header__nav a:is(:hover, :focus-visible)::before,
-.work__title:hover::before,
-.work a:focus-visible .work__title::before,
-.profile__text a:is(:hover, :focus-visible)::before,
-.university__courses a:is(:hover, :focus-visible)::before {
-  transform: scaleX(1);
-  transform-origin: left center;
-  transition: transform var(--band-time) var(--band-ease);
+  a.header__name:is(:hover, :focus-visible)::before,
+  .header__nav a:is(:hover, :focus-visible)::before,
+  .work__title:hover::before,
+  .work a:focus-visible .work__title::before,
+  .profile__text a:is(:hover, :focus-visible)::before,
+  .university__courses a:is(:hover, :focus-visible)::before {
+    transform: scaleX(1);
+    transform-origin: left center;
+    transition: transform var(--band-time) var(--band-ease);
+  }
 }
 
 /* University の授業名は字間（0.2em、カタカナだけの名前は 0.15em）が最後の文字のうしろにも付くので、その分だけ帯の右を縮める */
@@ -802,6 +805,284 @@ html.is-lightbox-open {
 @media (prefers-reduced-motion: reduce) {
   .university,
   .university-backdrop__item {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   スマホ（767px 以下。Figma: iPhone 14 & 15 Pro、393 幅）
+   Figma があるのは top / メニュー / University / ローディング。作品ページ・Movie・Profile・拡大表示は同じルールで組んだもの
+   ルール：左右 20 / 文字は PC のおよそ 0.63 倍 / 1 列（top と Movie の一覧は 2 列）
+   ============================================================ */
+
+.header__menu {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 20px;
+  }
+
+  /* ---- ヘッダー：名前のベースライン y≈50（三本線のいちばん下の線とそろう）、本文は y=111 から ---- */
+  .header {
+    position: relative;
+    height: 111px;
+    padding-top: 23px;
+  }
+
+  /* 三本線：幅 32、線 1.5、y=27 / 38.5 / 50 */
+  .header__menu {
+    display: block;
+    position: absolute;
+    top: 26.25px;
+    right: 0;
+    z-index: 41;
+    width: 32px;
+    height: 24.5px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .header__menu span {
+    position: absolute;
+    left: 0;
+    width: 32px;
+    height: 1.5px;
+    background: var(--color-ink);
+    transition: transform 300ms var(--band-ease), opacity 200ms ease;
+  }
+
+  .header__menu span:nth-child(1) { top: 0; }
+  .header__menu span:nth-child(2) { top: 11.5px; }
+  .header__menu span:nth-child(3) { top: 23px; }
+
+  /* 開いたとき：上下の線を ±45° に倒して ×（Figma 162:247。右端は三本線と同じ） */
+  .is-menu-open .header__menu span:nth-child(1) { transform: translate(4.69px, 11.5px) rotate(45deg); }
+  .is-menu-open .header__menu span:nth-child(2) { opacity: 0; }
+  .is-menu-open .header__menu span:nth-child(3) { transform: translate(4.69px, -11.5px) rotate(-45deg); }
+
+  /* メニュー：白い画面の真ん中に縦に並べる（Neue Haas Grotesk Display 24px、行の間 97） */
+  .header__nav {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 68px;
+    padding-top: 26px;
+    background: var(--color-bg);
+    font-family: "Neue Haas Grotesk Display", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 300ms ease, visibility 0s linear 300ms;
+  }
+
+  .is-menu-open .header__nav {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 300ms ease, visibility 0s;
+  }
+
+  /* 開いている間はスクロールさせず、名前と × を画面の上に留める（下までスクロールしていても見えるように） */
+  html.is-menu-open {
+    overflow: hidden;
+  }
+
+  .is-menu-open .header__name {
+    position: fixed;
+    top: 23px;
+    left: var(--gutter);
+    z-index: 41;
+  }
+
+  .is-menu-open .header__menu {
+    position: fixed;
+    right: var(--gutter);
+  }
+
+  /* ---- ローディング（Figma 162:286）：ロゴを小さく ---- */
+  .loader__logo {
+    width: 165px;
+  }
+
+  /* ---- top（Figma 162:213）：2 列・列の間 13・タイトル 10px（写真の下 4） ---- */
+  .works {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 13px;
+    row-gap: 20px;
+    padding-bottom: 80px;
+  }
+
+  .work__title {
+    height: 12px;
+    margin: 4px 0 0;
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  /* ---- 作品ページ・Movie（Figma なし）：タイトル → メイン画像 → 写真は 1 列 → 情報 ---- */
+  .work-hero {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .work-page .work-hero__text {
+    padding-top: 0;
+  }
+
+  .work-hero__title {
+    font-size: 25px;
+  }
+
+  .work-page .work-hero__category {
+    margin-top: 6px;
+    font-size: 20px;
+  }
+
+  .work-gallery {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+
+  .work-info {
+    gap: 32px;
+    margin-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .work-info dt {
+    font-size: 15px;
+  }
+
+  /* 「レーザーカッ / ター」のように語の途中で折り返さない（, と空白のところで折り返す） */
+  .work-info dd {
+    font-size: 13px;
+    word-break: keep-all;
+  }
+
+  /* Movie の一覧は 2 列のまま（縦の動画を並べない組み方を保つ） */
+  .movie-grid {
+    margin-top: 40px;
+  }
+
+  /* ---- Profile（Figma なし） ---- */
+  .profile {
+    padding-bottom: 80px;
+  }
+
+  .profile__heading {
+    gap: 10px;
+  }
+
+  .profile__name {
+    font-size: 20px;
+  }
+
+  .profile__kana {
+    font-size: 10px;
+  }
+
+  .profile__text {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+
+  .profile__text + .profile__text {
+    margin-top: 26px;
+  }
+
+  /* ---- University（Figma 162:322）：学校名 y=124、学年 y=183、授業名は 1 列で 34 ずつ ---- */
+  .university {
+    margin-top: 13px;
+    padding-bottom: 80px;
+  }
+
+  .university__school {
+    font-size: 13px;
+    line-height: 12px;
+    text-align: left;
+    translate: none;
+  }
+
+  .university__grade {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+    margin-top: 35px;
+  }
+
+  .university__year,
+  .university__courses li {
+    font-size: 10px;
+  }
+
+  .university__courses {
+    gap: 14px;
+  }
+
+  .university__courses ul,
+  .university__courses .university__wide {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+  }
+
+  /* ホバーの写真はスマホでは出さない */
+  .university-backdrop {
+    display: none;
+  }
+
+  .university-page.is-backdrop .university {
+    color: inherit;
+  }
+
+  /* ---- 拡大表示（Figma なし）：写真は幅いっぱい、× は右上（メニューの × と同じ位置）、< > は下の左右。スワイプでも前後へ ---- */
+  .lightbox__frame {
+    top: 80px;
+    bottom: 80px;
+    left: var(--gutter);
+    right: var(--gutter);
+    width: auto;
+    translate: none;
+  }
+
+  .lightbox .lightbox__close {
+    position: fixed;
+    top: 27.2px;
+    right: var(--gutter);
+  }
+
+  .lightbox .lightbox__close svg {
+    width: 22.63px;
+    height: 22.63px;
+  }
+
+  .lightbox .lightbox__prev,
+  .lightbox .lightbox__next {
+    position: fixed;
+    top: auto;
+    bottom: 22px;
+    translate: none;
+  }
+
+  .lightbox .lightbox__prev {
+    left: var(--gutter);
+  }
+
+  .lightbox .lightbox__next {
+    right: var(--gutter);
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .header__menu span,
+  .header__nav {
     transition: none;
   }
 }

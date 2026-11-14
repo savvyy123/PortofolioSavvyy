@@ -60,7 +60,7 @@
       <img class="lightbox__image" alt="">
       <video class="lightbox__video" muted loop playsinline hidden></video>
       <button class="lightbox__close" type="button" aria-label="閉じる">
-        <svg width="35.36" height="35.36" viewBox="0 0 35.36 35.36" aria-hidden="true"><path d="M0 35.36 35.36 0M35.36 35.36 0 0"/></svg>
+        <svg width="35.36" height="35.36" viewBox="0 0 35.36 35.36" aria-hidden="true"><path d="M0 35.36 35.36 0M35.36 35.36 0 0" vector-effect="non-scaling-stroke"/></svg>
       </button>
       <button class="lightbox__prev" type="button" aria-label="前へ">
         <svg width="17.68" height="35.36" viewBox="0 0 17.68 35.36" aria-hidden="true"><path d="M17.68 0 0 17.68l17.68 17.68"/></svg>
@@ -209,4 +209,21 @@
     else if (e.key === "ArrowLeft" && !single) show(current - 1);
     else if (e.key === "ArrowRight" && !single) show(current + 1);
   });
+
+  // スマホ：左右にスワイプで前後へ（横に 50px 以上、縦より大きく動かしたとき）
+  let touchX = null;
+  let touchY = null;
+  box.addEventListener("touchstart", (e) => {
+    if (e.touches.length !== 1) { touchX = null; return; }
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener("touchend", (e) => {
+    if (touchX === null || single) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchX;
+    const dy = t.clientY - touchY;
+    touchX = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(current + (dx < 0 ? 1 : -1));
+  }, { passive: true });
 })();

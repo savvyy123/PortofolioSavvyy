@@ -16,6 +16,9 @@
     page.classList.toggle("is-backdrop", !!current);
   }
 
+  // タッチだけの画面（スマホ）ではホバーがないので出さない（タップした瞬間に写真がちらつくのを防ぐ）
+  if (!matchMedia("(hover: hover)").matches) return;
+
   links.forEach((link) => {
     const key = link.dataset.bg;
     link.addEventListener("pointerenter", () => show(key));

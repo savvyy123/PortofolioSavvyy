@@ -10,12 +10,16 @@
   <!-- 作品１（Figma: ポートフォリオ / 作品１ 49:36、1440px 幅） -->
   <header class="header">
     <a class="header__name" href="../index.html">Ishikawa Sota</a>
-    <nav class="header__nav">
+    <nav class="header__nav" id="site-nav">
       <a href="../profile.html">Profile</a>
       <a href="../movie.html">Movie</a>
       <a href="../university.html">University</a>
       <a>Blog</a>
     </nav>
+    <!-- スマホ：メニューを開く三本線（js/menu.js） -->
+    <button class="header__menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <main class="work-page">
@@ -49,5 +53,6 @@
     </dl>
   </main>
   <script src="../js/lightbox.js"></script>
+  <script src="../js/menu.js"></script>
 </body>
 </html>
