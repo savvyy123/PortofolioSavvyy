@@ -809,6 +809,188 @@ html.is-lightbox-open {
   }
 }
 
+/* ---- Blog（Figma 191:2）：グリッドに乗せない自由な配置。Figma の座標をそのまま使う ----
+   座標の原点はヘッダーの下（Figma の x=120, y=180）。PC は幅 1200 × 高さ 1192 の台紙に置き、
+   窓が狭いときは js/blog.js が --blog-scale で台紙ごと縮める。スマホは上から順に並べる */
+
+.blog {
+  width: min(1200px, 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+/* 日本語は AXIS、英数字は Neue Haas（Figma は英字フォントに日本語を流し込んでいる） */
+.blog__canvas {
+  font-family: "Neue Haas Grotesk Display Round", "AXIS Std", sans-serif;
+  font-weight: 400;
+}
+
+/* 「A LIFE」を 4 つ、-7.25° 傾けて散らす（--x, --y は文字の中心） */
+.blog__title {
+  position: relative;
+  width: 254px;
+  height: 141px;
+}
+
+.blog__life span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  translate: -50% -50%;
+  rotate: -7.25deg;
+}
+
+.blog__subtitle {
+  position: absolute;
+  left: 114px;
+  top: 117px;
+  font-family: var(--font-ja);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
+.blog__heading,
+.blog__goal {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.blog__goal span {
+  display: block;
+}
+
+.blog__text {
+  font-size: 13px;
+  line-height: 16px;
+  text-align: justify;
+}
+
+/* 段落の間は 1 行あける */
+.blog__text p + p {
+  margin-top: 16px;
+}
+
+/* 手書きのメモ：377×539、黒い線で囲んで 2.12° 傾ける */
+.blog__image img {
+  display: block;
+  width: 377px;
+  height: 539px;
+  border: 1px solid var(--color-ink);
+  object-fit: cover;
+  rotate: 2.12deg;
+}
+
+/* 名前は線で囲んだ丸い枠（98×16）、日付はその右 27 */
+.blog__byline {
+  display: flex;
+  gap: 27px;
+  font-size: 13px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.blog__author {
+  width: 98px;
+  height: 16px;
+  padding: 0 5px;
+  border: 1px solid var(--color-ink);
+  border-radius: 90px;
+  line-height: 14px;
+}
+
+@media (min-width: 768px) {
+  .blog {
+    height: calc(1192px * var(--blog-scale, 1));
+  }
+
+  .blog__canvas {
+    position: relative;
+    width: 1200px;
+    height: 1192px;
+    transform-origin: 0 0;
+    scale: var(--blog-scale, 1);
+  }
+
+  .blog__canvas > * {
+    position: absolute;
+  }
+
+  .blog__title { left: 474px; top: 26px; }                 /* Figma (594, 206) */
+  .blog__heading { left: 0; top: 346px; }                  /* Figma (120, 526)：名前の左端にそろえる */
+  .blog__text--intro { left: 168px; top: 392px; width: 574px; }   /* Figma (288, 572) */
+  .blog__goal { left: 0; top: 569px; }                     /* 目 Figma (120, 749) */
+  .blog__goal span + span { margin: 0 0 0 31px; }          /* 標 Figma (151, 778) */
+  .blog__text--goal1 { left: 116px; top: 615px; width: 389px; }    /* Figma (236, 795) */
+  .blog__text--goal2 { left: 118px; top: 749px; width: 389px; }    /* Figma (238, 929) */
+  .blog__image { left: 838.83px; top: 338.78px; }          /* 傾ける前の枠。中心は Figma (1147.3, 788.3) */
+  .blog__byline { left: 978px; top: 1076px; }              /* Figma (1098, 1256) */
+}
+
+/* スマホ（Figma なし）：上から順に。左右 20 */
+@media (max-width: 767px) {
+  .blog {
+    padding-bottom: 80px;
+  }
+
+  .blog__canvas {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog__title {
+    margin: 0 auto 48px;
+  }
+
+  .blog__heading {
+    font-size: 18px;
+  }
+
+  .blog__goal {
+    margin-top: 48px;
+    font-size: 18px;
+  }
+
+  .blog__goal span + span {
+    margin-left: 23px;
+  }
+
+  .blog__text--intro {
+    margin: 16px 0 0 20px;
+  }
+
+  .blog__text--goal1 {
+    margin: 16px 0 0 40px;
+  }
+
+  .blog__text--goal2 {
+    margin: 24px 0 0 42px;
+  }
+
+  .blog__image {
+    align-self: center;
+    width: min(300px, 85%);
+    margin-top: 48px;
+  }
+
+  .blog__image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 377 / 539;
+  }
+
+  .blog__byline {
+    align-self: flex-end;
+    margin-top: 48px;
+  }
+}
+
 /* ============================================================
    スマホ（767px 以下。Figma: iPhone 14 & 15 Pro、393 幅）
    Figma があるのは top / メニュー / University / ローディング。作品ページ・Movie・Profile・拡大表示は同じルールで組んだもの

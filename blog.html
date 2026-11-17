@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Ishikawa Sota</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Blog（Figma: ポートフォリオ / Blog 191:2、1440px 幅）。グリッドに乗せない自由な配置なので、Figma の位置をそのまま使う -->
+  <header class="header">
+    <a class="header__name" href="index.html">Ishikawa Sota</a>
+    <nav class="header__nav" id="site-nav">
+      <a href="profile.html">Profile</a>
+      <a href="movie.html">Movie</a>
+      <a href="university.html">University</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+    <!-- スマホ：メニューを開く三本線（js/menu.js） -->
+    <button class="header__menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main class="blog">
+    <article class="blog__canvas">
+      <div class="blog__title">
+        <h1 class="blog__life">
+          <span style="--x: 35.06px; --y: 98.13px">A LIFE</span>
+          <span style="--x: 81.32px; --y: 18.61px" aria-hidden="true">A LIFE</span>
+          <span style="--x: 114.17px; --y: 37.72px" aria-hidden="true">A LIFE</span>
+          <span style="--x: 67.91px; --y: 117.24px" aria-hidden="true">A LIFE</span>
+        </h1>
+        <p class="blog__subtitle">人生についてのBlog</p>
+      </div>
+
+      <h2 class="blog__heading">とりあえず、何も考えずに、手を動かすところから</h2>
+      <div class="blog__text blog__text--intro">
+        <p>このブログには、決まりきったグリッドも、デザイン感も持ち込んでいない。そういうとこから離れて、ただ文字を書きたいという欲求をかなえるために、Figmaを動かしてみようというものになれ場いいなと思っている。</p>
+        <p>そして、いつか、このブログが、データとなって私がやりたいことをかなえるための叶えたときのメモ帳になればいいなと思っている。</p>
+      </div>
+
+      <h2 class="blog__goal"><span>目</span><span>標</span></h2>
+      <div class="blog__text blog__text--goal1">
+        <p>私は、自分の人生を豊かにしたい。<br>
+        そのためには、今よりもっと、過去を超えてという欲求が常にある。<br>
+        それは傍から見たら、愚かな人間の欲の塊のように見えるかもしれないがもうそういう人間なのだからしょうがないじゃないかと素直に開き直ってしまっていもいる。</p>
+      </div>
+      <div class="blog__text blog__text--goal2">
+        <p>だから、私は、それをかなえるために、いろいろ考えてみようと思う。ゆっくりと。<br>
+        まずは、私のためのAIを作ってみようと思う。習慣を作って、人生を豊かにするために。<br>
+        とりあえず、明日の朝を起きるために。</p>
+      </div>
+
+      <figure class="blog__image">
+        <img src="assets/blog/note.webp" width="377" height="539" alt="「A LIFE」の構想を書いた手書きのメモ。人生管理ツール、アプリ・WEB・Windows と Mac、日記を書かせる、などの書き込み">
+      </figure>
+
+      <p class="blog__byline"><span class="blog__author">ISHIKAWA Sota</span><time datetime="2026-11-17">2026/11/17</time></p>
+    </article>
+  </main>
+
+  <script src="js/blog.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+</html>
